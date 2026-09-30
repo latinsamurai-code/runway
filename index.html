@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Runway</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Runway">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#0f1113;--s:#171a1d;--line:#2a2f34;--ink:#efeae0;--sub:#9b9a92;--acc:#d8a94b;
+  --serif:"Instrument Serif",Georgia,"Times New Roman",serif;--sans:"Hanken Grotesk","Helvetica Neue",Arial,sans-serif}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;overscroll-behavior:none}
+body{display:flex;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+.label{font:600 12px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--sub)}
+
+nav{width:268px;flex:none;padding:44px 30px 34px;display:flex;flex-direction:column;border-right:1px solid var(--line);overflow-y:auto}
+.mark{font:600 15px var(--sans);letter-spacing:.46em;color:var(--ink)}
+nav .label{margin:10px 0 0}
+.cl{border-top:1px dashed var(--acc);margin:26px 0 22px;opacity:.7}
+nav button{display:flex;gap:16px;align-items:baseline;font:500 16px var(--sans);text-align:left;padding:13px 0;border:0;background:none;color:var(--sub);letter-spacing:.01em}
+nav button i{font:normal 500 11px var(--sans);letter-spacing:.12em;color:#5d5f5d;min-width:20px}
+nav button.on{color:var(--ink)}nav button.on i{color:var(--acc)}
+nav .sos{margin-top:auto;border:1px solid var(--line);justify-content:center;padding:15px;font:600 12px var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--ink)}
+
+main{flex:1;min-width:0;overflow-y:auto;padding:54px 68px 60px;-webkit-overflow-scrolling:touch}
+section{display:none;max-width:860px}section.on{display:block}
+h2{font:400 66px/1 var(--serif);letter-spacing:-.01em;margin:0 0 14px}
+h2 em{color:var(--acc)}
+.lead{font-size:19px;line-height:1.65;color:var(--sub);margin:0 0 34px;max-width:620px}
+h3{margin:44px 0 8px}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:20px 0;border-bottom:1px solid var(--line)}
+.row .v{font:400 28px var(--serif);text-align:right}
+.acc{color:var(--acc)}
+
+.btn,button.go{display:flex;justify-content:space-between;align-items:center;text-decoration:none;font:600 12px var(--sans);letter-spacing:.2em;text-transform:uppercase;padding:21px 24px;border:1px solid #4a4d4f;color:var(--ink);background:none}
+.btn:after,button.go:after{content:"\2192";font-size:16px;letter-spacing:0}
+.btn.pri,button.go{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.card{display:block;text-decoration:none;color:var(--ink);padding:28px 26px;border:1px solid var(--line);background:var(--s)}
+.card b{display:block;font:400 32px/1.1 var(--serif);margin-bottom:8px;font-weight:400}
+.card span{font-size:15px;color:var(--sub)}
+
+.item{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line)}
+.item b{font:400 27px var(--serif);font-weight:400}.item small{display:block;color:var(--sub);font-size:14px;margin-top:2px;letter-spacing:.04em}
+.qty{display:flex;align-items:center;gap:18px}.qty span{min-width:20px;text-align:center;font:400 24px var(--serif)}
+.qty button{width:46px;height:46px;border-radius:50%;border:1px solid #4a4d4f;background:none;color:var(--ink);font:300 24px var(--sans)}
+input{-webkit-user-select:text;user-select:text;font:400 20px var(--sans);width:100%;padding:12px 0;margin:6px 0 30px;border:0;border-bottom:1px solid #4a4d4f;background:none;color:var(--ink);border-radius:0;outline:0}
+input::placeholder{color:#5d5f5d}
+
+#qrs{display:flex;gap:34px;flex-wrap:wrap;margin:34px 0}
+#qrs .q{background:#fff;padding:12px;display:inline-block;margin-bottom:12px}
+ul.rules{list-style:none;margin:0;padding:0}
+ul.rules li{padding:16px 0;border-bottom:1px solid var(--line);font-size:19px;line-height:1.5}
+.place{padding:22px 0;border-bottom:1px solid var(--line)}
+.place h4{margin:0 0 6px;font:400 30px var(--serif)}.place p{margin:0;font-size:17px;line-height:1.6;color:var(--sub)}
+
+.svc{display:flex;align-items:center;gap:26px;width:100%;text-align:left;padding:26px 0;border:0;border-bottom:1px solid var(--line);background:none;color:var(--ink)}
+.svc i{font:normal 500 12px var(--sans);letter-spacing:.14em;color:var(--acc);min-width:26px}
+.svc div{flex:1}.svc b{display:block;font:400 36px/1.1 var(--serif);font-weight:400}.svc span{font-size:15px;color:var(--sub)}
+.svc em{font:normal 500 14px var(--sans);letter-spacing:.06em;color:var(--sub)}
+.back{border:0;background:none;color:var(--sub);padding:0;margin-bottom:34px;font:600 12px var(--sans);letter-spacing:.2em;text-transform:uppercase}
+.price{margin:34px 0;padding:26px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.price div{font:400 56px/1.05 var(--serif);color:var(--acc);margin-top:8px}.price small{color:var(--sub);font-size:15px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-bottom:40px}
+.two ul{margin:12px 0 0;padding-left:18px;font-size:18px;line-height:1.8}
+
+@media (orientation:portrait){body{flex-direction:column}
+  nav{width:auto;flex-direction:row;align-items:center;gap:22px;overflow-x:auto;overflow-y:hidden;padding:18px 24px;border-right:0;border-bottom:1px solid var(--line)}
+  nav .mark,nav .label,nav .cl{display:none}nav button{white-space:nowrap;padding:8px 0}nav button i{display:none}nav .sos{margin:0;padding:10px 16px}
+  main{padding:34px 32px}h2{font-size:52px}.two{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="mark">RUNWAY</div><div class="label">Sidemen &middot; Bali</div><div class="cl"></div>
+  <button data-t="welcome" class="on"><i>01</i>Welcome</button>
+  <button data-t="drinks"><i>02</i>Drinks &amp; Snacks</button>
+  <button data-t="music"><i>03</i>Music &amp; TV</button>
+  <button data-t="go"><i>04</i>Getting around</button>
+  <button data-t="extras"><i>05</i>Extra services</button>
+  <button data-t="sidemen"><i>06</i>Sidemen guide</button>
+  <button data-t="info"><i>07</i>House info</button>
+  <button data-t="share"><i>08</i>Feedback &amp; share</button>
+  <button data-t="info" class="sos">Emergency</button>
+</nav>
+<main>
+  <section id="welcome" class="on">
+    <div class="label" style="margin-bottom:18px">Welcome</div>
+    <h2>Make yourself<br><em>at home.</em></h2>
+    <p class="lead">Scan a code with your phone, or use this iPad. To return here, press the round button and tap the Runway icon.</p>
+    <div class="row"><span class="label">Wi-Fi network</span><span class="v" id="ssid"></span></div>
+    <div class="row"><span class="label">Password</span><span class="v" id="pw"></span></div>
+    <div id="qrs">
+      <div><div class="q" id="qr-wifi"></div><br><span class="label">Join Wi-Fi</span></div>
+      <div><div class="q" id="qr-wa"></div><br><span class="label">Concierge</span></div>
+    </div>
+    <a class="btn pri" id="wa-concierge" href="#">Message the concierge on WhatsApp</a>
+  </section>
+
+  <section id="drinks">
+    <div class="label" style="margin-bottom:18px">Drinks &amp; Snacks</div>
+    <h2>Order to<br><em>the villa.</em></h2>
+    <p class="lead">Choose what you like and send. Our staff will bring it over.</p>
+    <div id="menu"></div>
+    <div class="label" style="margin-top:34px">Your name / where you are</div>
+    <input id="who" placeholder="e.g. Sam, by the pool">
+    <button class="go" id="send-order" style="width:100%">Send order to staff</button>
+  </section>
+
+  <section id="music">
+    <div class="label" style="margin-bottom:18px">Music &amp; TV</div>
+    <h2>Set the <em>mood.</em></h2>
+    <p class="lead">Connect the iPad to the speaker or projector by Bluetooth, then open an app. Press the round button to come back.</p>
+    <div class="grid">
+      <a class="card" href="spotify:"><b>Spotify</b><span>Music</span></a>
+      <a class="card" href="nflx://www.netflix.com/browse"><b>Netflix</b><span>Movies &amp; series</span></a>
+    </div>
+  </section>
+
+  <section id="go">
+    <div class="label" style="margin-bottom:18px">Getting around</div>
+    <h2>Going <em>out?</em></h2>
+    <p class="lead">Book a ride yourself, or let the concierge arrange a driver.</p>
+    <div class="grid">
+      <a class="card" href="grab://open"><b>Grab</b><span>Cars &amp; motorbike taxis</span></a>
+      <a class="card wa" data-to="concierge" data-msg="Hi, I'd like a car with driver. Date / time / destination: "><b>Car with driver</b><span>Ask the concierge</span></a>
+      <a class="card wa" data-to="concierge" data-msg="Hi, I'd like to rent a scooter. Dates: "><b>Scooter rental</b><span>Ask the concierge</span></a>
+    </div>
+  </section>
+
+  <section id="extras">
+    <div id="svc-list">
+      <div class="label" style="margin-bottom:18px">Extra services</div>
+      <h2>Make it<br><em>special.</em></h2>
+      <p class="lead">Tap a service to see details and prices.</p>
+      <div id="svcs"></div>
+    </div>
+    <div id="svc-detail" style="display:none"></div>
+  </section>
+
+  <section id="sidemen">
+    <div class="label" style="margin-bottom:18px">Sidemen guide</div>
+    <h2>The <em>valley.</em></h2>
+    <p class="lead">A quiet valley on the slopes of Mt Agung. Ask the concierge and we will arrange any of these.</p>
+    <div id="places"></div>
+  </section>
+
+  <section id="info">
+    <div class="label" style="margin-bottom:18px">House info</div>
+    <h2>Good to <em>know.</em></h2>
+    <div class="row"><span class="label">Check-in</span><span class="v">From 14:00</span></div>
+    <div class="row"><span class="label">Check-out</span><span class="v">By 11:00</span></div>
+    <h3 class="label">House rules</h3>
+    <ul class="rules">
+      <li>Please take your shoes off before entering the house.</li>
+      <li>No smoking inside. Please use the outdoor areas.</li>
+      <li>Quiet hours from 22:00. Our neighbours are close.</li>
+      <li>Shower before you swim. Children must be supervised at the pool.</li>
+      <li>The water from the taps is filtered.</li>
+      <li>Please tell us before inviting visitors.</li>
+    </ul>
+    <h3 class="label">Emergency</h3>
+    <div class="row"><span class="label">General emergency</span><span class="v acc">112</span></div>
+    <div class="row"><span class="label">Police</span><span class="v acc">110</span></div>
+    <div class="row"><span class="label">Ambulance</span><span class="v acc">118</span></div>
+    <a class="btn pri wa" data-to="concierge" data-msg="URGENT at Runway: " style="margin-top:22px">Message the villa manager now</a>
+    <h3 class="label">Nearby hospitals</h3>
+    <div class="row"><span class="label">RSUD Klungkung, Semarapura</span><span class="v">about 30 min</span></div>
+    <div class="row"><span class="label">RSUD Karangasem, Amlapura</span><span class="v">about 40 min</span></div>
+    <h3 class="label">Pharmacy</h3>
+    <div class="row"><span class="label">Nearest apotek</span><span class="v">Ask the concierge</span></div>
+  </section>
+
+  <section id="share">
+    <div class="label" style="margin-bottom:18px">Feedback &amp; share</div>
+    <h2>Tell us <em>anything.</em></h2>
+    <p class="lead">Ideas, problems, thank-yous. It goes straight to the management.</p>
+    <a class="btn pri wa" data-to="mgmt" data-msg="Suggestion for Runway: ">Send a suggestion</a>
+    <p class="lead" style="margin:44px 0 18px">Enjoying your stay? Tag us and share your photos.</p>
+    <div class="grid">
+      <a class="card" id="ig" href="#"><b>Instagram</b><span id="ig-t"></span></a>
+      <a class="card" id="tt" href="#"><b>TikTok</b><span id="tt-t"></span></a>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+// ===== EDIT THESE =====
+var CONFIG = {
+  wifiName: "Runway-Guest", wifiPass: "CHANGE-ME",
+  waConcierge: "620000000000",   // digits only, country code first
+  waStaff:     "620000000000",   // drinks & snacks orders
+  waMgmt:      "620000000000",   // suggestions to management
+  instagram: "runwaybali", igTag: "#runwaybali",
+  tiktok: "runwaybali",    ttTag: "#runwaybali"
+};
+var P = "IDR 000,000"; // placeholder price, replace later
+var MENU = [["Bintang beer",P],["Fresh coconut",P],["Iced tea",P],["Balinese coffee",P],
+  ["Chips &amp; peanuts",P],["Fruit plate",P],["Toast &amp; jam",P]];
+var SERVICES = [
+  {n:"BBQ",tag:"By the pool or on the terrace",
+   d:"A private BBQ prepared and cleaned up by our team, with a grill set up wherever you like.",
+   inc:["Grill and charcoal","Marinated meat, fish and vegetables","Salads and sides","Setup and cleanup"],
+   know:["Book by noon for the same evening","Please tell us any allergies"],
+   price:P,unit:"per person",msg:"Hi, I'd like to book a BBQ. Date / time / number of guests: "},
+  {n:"Massage",tag:"In the villa",
+   d:"A traditional Balinese massage by a trained therapist, in the comfort of the villa.",
+   inc:["Therapist comes to you","Oils and towels","60 or 90 minutes"],
+   know:["Book at least 3 hours ahead","Couples can be side by side"],
+   price:P,unit:"per person, 60 min",msg:"Hi, I'd like to book a massage. Date / time / number of people: "},
+  {n:"Drone photo shoot",tag:"Golden hour over the valley",
+   d:"An aerial photo and video session of the villa and the valley around it.",
+   inc:["About 20 minutes of flying","Edited photos and a short clip","Delivered within 48 hours"],
+   know:["Weather dependent","Best around sunrise or sunset"],
+   price:P,unit:"per session",msg:"Hi, I'd like to book a drone photo shoot. Date / time: "},
+  {n:"Airport transfer",tag:"Private car with driver",
+   d:"A private car from Ngurah Rai Airport (DPS) to the villa, or back.",
+   inc:["Driver meets you at arrivals","Flight monitoring","Water and a cool towel"],
+   know:["About 2 hours each way","Send us your flight number"],
+   price:P,unit:"one way",msg:"Hi, I'd like an airport transfer. Flight number / date / time: "}
+];
+var PLACES = [
+  ["Sidemen rice terraces","Walk the paths through the valley at sunrise or late afternoon. Views of Mt Agung on clear mornings."],
+  ["Weaving villages","Sidemen is known for hand-woven textiles. Visit a workshop and watch the looms."],
+  ["Tirta Gangga","Royal water garden, about 30 minutes away. Best early to avoid crowds."],
+  ["Besakih temple","Bali's largest temple complex on the slope of Mt Agung. Sarong and modest dress required."],
+  ["Local warungs","Ask the concierge for our favourite family-run places in the valley."]];
+// ======================
+function wa(to,msg){var n=to==="mgmt"?CONFIG.waMgmt:to==="staff"?CONFIG.waStaff:CONFIG.waConcierge;return "https://wa.me/"+n+"?text="+encodeURIComponent(msg||"")}
+function $(id){return document.getElementById(id)}
+var tabs=document.querySelectorAll("nav button"),secs=document.querySelectorAll("section"),main=document.querySelector("main"),timer;
+function closeSvc(){$("svc-detail").style.display="none";$("svc-list").style.display="block"}
+function show(id){closeSvc();tabs.forEach(function(b){b.classList.toggle("on",b.dataset.t===id&&!b.classList.contains("sos"))});secs.forEach(function(s){s.classList.toggle("on",s.id===id)});main.scrollTop=0}
+tabs.forEach(function(b){b.onclick=function(){show(b.dataset.t);if(b.classList.contains("sos"))setTimeout(function(){var h=document.querySelectorAll("#info h3")[1];h&&main.scrollTo(0,h.offsetTop-30)},0)}});
+
+$("ssid").textContent=CONFIG.wifiName;$("pw").textContent=CONFIG.wifiPass;
+$("wa-concierge").href=wa("concierge","Hi, I'm staying at Runway. ");
+document.querySelectorAll(".wa").forEach(function(a){a.href=wa(a.dataset.to,a.dataset.msg)});
+$("ig").href="https://www.instagram.com/"+CONFIG.instagram+"/";$("ig-t").textContent=CONFIG.igTag;
+$("tt").href="https://www.tiktok.com/@"+CONFIG.tiktok;$("tt-t").textContent=CONFIG.ttTag;
+try{
+  new QRCode($("qr-wifi"),{text:"WIFI:T:WPA;S:"+CONFIG.wifiName+";P:"+CONFIG.wifiPass+";;",width:150,height:150});
+  new QRCode($("qr-wa"),{text:"https://wa.me/"+CONFIG.waConcierge,width:150,height:150});
+}catch(e){document.querySelectorAll("#qrs .q").forEach(function(q){q.textContent="QR unavailable"})}
+
+var qty=MENU.map(function(){return 0});
+$("menu").innerHTML=MENU.map(function(m,i){return '<div class="item"><div><b>'+m[0]+'</b><small>'+m[1]+'</small></div><div class="qty"><button data-i="'+i+'" data-d="-1">&minus;</button><span id="q'+i+'">0</span><button data-i="'+i+'" data-d="1">+</button></div></div>'}).join("");
+$("menu").onclick=function(e){var b=e.target.closest("button");if(!b)return;var i=+b.dataset.i;qty[i]=Math.max(0,qty[i]+ +b.dataset.d);$("q"+i).textContent=qty[i]};
+$("send-order").onclick=function(){
+  var lines=MENU.map(function(m,i){return qty[i]?qty[i]+" x "+m[0].replace(/&amp;/g,"&"):""}).filter(Boolean);
+  if(!lines.length){alert("Please choose at least one item.");return}
+  var who=$("who").value.trim();
+  location.href=wa("staff","Drinks & Snacks order"+(who?" ("+who+")":"")+":\n"+lines.join("\n"));
+};
+
+$("svcs").innerHTML=SERVICES.map(function(s,i){return '<button class="svc" data-i="'+i+'"><i>0'+(i+1)+'</i><div><b>'+s.n+'</b><span>'+s.tag+'</span></div><em>'+s.price+'</em></button>'}).join("");
+$("svcs").onclick=function(e){var b=e.target.closest(".svc");if(!b)return;var s=SERVICES[+b.dataset.i];
+  var ul=function(a){return a.map(function(x){return "<li>"+x+"</li>"}).join("")};
+  $("svc-detail").innerHTML='<button class="back" id="svc-back">&larr; All services</button><div class="label">'+s.tag+'</div><h2>'+s.n+'</h2><p class="lead" style="margin-bottom:0">'+s.d+'</p>'+
+    '<div class="price"><span class="label">Price</span><div>'+s.price+'</div><small>'+s.unit+'</small></div>'+
+    '<div class="two"><div><span class="label">Included</span><ul>'+ul(s.inc)+'</ul></div><div><span class="label">Good to know</span><ul>'+ul(s.know)+'</ul></div></div>'+
+    '<a class="btn pri" href="'+wa("concierge",s.msg)+'">Request on WhatsApp</a>';
+  $("svc-list").style.display="none";$("svc-detail").style.display="block";main.scrollTop=0;
+  $("svc-back").onclick=function(){closeSvc();main.scrollTop=0};
+};
+$("places").innerHTML=PLACES.map(function(p){return '<div class="place"><h4>'+p[0]+'</h4><p>'+p[1]+'</p></div>'}).join("");
+
+function reset(){clearTimeout(timer);timer=setTimeout(function(){show("welcome")},90000)}
+["touchstart","click","scroll"].forEach(function(ev){document.addEventListener(ev,reset,{passive:true})});reset();
+["gesturestart","gesturechange"].forEach(function(ev){document.addEventListener(ev,function(e){e.preventDefault()})});
+function wake(){try{navigator.wakeLock&&navigator.wakeLock.request("screen")}catch(e){}}
+wake();document.addEventListener("visibilitychange",function(){if(!document.hidden){wake();reset()}});
+</script>
+</body>
+</html>
