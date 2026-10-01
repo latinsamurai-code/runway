@@ -6,192 +6,208 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Runway">
+<meta name="theme-color" content="#f2f0eb">
 <link rel="apple-touch-icon" href="icon-180.png">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600&display=swap">
 <style>
-:root{--bg:#0f1113;--s:#171a1d;--line:#2a2f34;--ink:#efeae0;--sub:#9b9a92;--acc:#d8a94b;
-  --serif:"Instrument Serif",Georgia,"Times New Roman",serif;--sans:"Hanken Grotesk","Helvetica Neue",Arial,sans-serif}
+:root{--bg:#f2f0eb;--card:#fff;--ink:#141414;--sub:#6f6d68;--line:rgba(20,20,20,.08);--acc:#ff5a1f;
+  --sh:0 1px 2px rgba(20,20,20,.04),0 10px 28px rgba(20,20,20,.06);
+  --sans:-apple-system,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif;--mono:ui-monospace,"SF Mono",Menlo,monospace}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
-html,body{height:100%;margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;overscroll-behavior:none}
-body{display:flex;padding:min(env(safe-area-inset-top),24px) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
-.label{font:600 12px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--sub)}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;overscroll-behavior:none;-webkit-font-smoothing:antialiased}
+body{display:flex;gap:14px;padding:calc(14px + min(env(safe-area-inset-top),24px)) calc(14px + env(safe-area-inset-right)) calc(14px + env(safe-area-inset-bottom)) calc(14px + env(safe-area-inset-left))}
 
-nav{width:268px;flex:none;padding:36px 30px 30px;display:flex;flex-direction:column;border-right:1px solid var(--line);overflow-y:auto}
-.mark{font:600 15px var(--sans);letter-spacing:.46em;color:var(--ink)}
-nav .label{margin:10px 0 0}
-.cl{border-top:1px dashed var(--acc);margin:26px 0 22px;opacity:.7}
-nav button{display:flex;gap:16px;align-items:baseline;font:500 16px var(--sans);text-align:left;padding:13px 0;border:0;background:none;color:var(--sub);letter-spacing:.01em}
-nav button i{font:normal 500 11px var(--sans);letter-spacing:.12em;color:#5d5f5d;min-width:20px}
-nav button.on{color:var(--ink)}nav button.on i{color:var(--acc)}
-nav .sos{margin-top:auto;border:1px solid var(--line);justify-content:center;padding:15px;font:600 12px var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--ink)}
+nav{width:262px;flex:none;background:var(--card);border-radius:30px;box-shadow:var(--sh);padding:30px 14px 16px;display:flex;flex-direction:column;gap:3px;overflow-y:auto}
+.mark{padding:0 14px;font:800 20px var(--sans);letter-spacing:.46em;color:var(--ink)}
+.cl{margin:12px 14px 4px;height:2px;background:repeating-linear-gradient(90deg,var(--acc) 0 9px,transparent 9px 16px)}
+.place-tag{padding:6px 14px 20px;font:500 13px var(--sans);color:var(--sub);letter-spacing:.06em}
+nav button{display:flex;align-items:center;gap:14px;height:50px;padding:0 14px;border:0;border-radius:999px;background:none;color:var(--ink);font:500 17px var(--sans);text-align:left}
+nav button svg{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;color:var(--sub)}
+nav button.on{background:var(--ink);color:#fff}nav button.on svg{color:var(--acc)}
+nav .sos{margin-top:auto;justify-content:center;background:#fdeceb;color:#d92d20;font-weight:600}
+nav .sos svg{color:#d92d20}
 
-main{flex:1;min-width:0;overflow-y:auto;padding:44px 60px 48px;-webkit-overflow-scrolling:touch}
-section{display:none;max-width:860px}section.on{display:block}
-h2{font:400 clamp(40px,5.2vw,64px)/1.05 var(--serif);letter-spacing:-.01em;margin:0 0 18px;white-space:nowrap}
-h2 em{color:var(--acc)}
-.lead{font-size:19px;line-height:1.65;color:var(--sub);margin:0 0 34px;max-width:620px}
-h3{margin:44px 0 8px}
-.row{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:20px 0;border-bottom:1px solid var(--line)}
-.row .v{font:400 28px var(--serif);text-align:right}
-.acc{color:var(--acc)}
+main{flex:1;min-width:0;overflow-y:auto;padding:22px 26px 40px;-webkit-overflow-scrolling:touch}
+section{display:none;max-width:780px}section.on{display:block}
+.eye{display:flex;align-items:center;gap:10px;font:600 13px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--sub);margin-bottom:12px}
+.eye:before{content:"";width:22px;height:2px;background:var(--acc)}
+h2{font:700 clamp(38px,5vw,58px)/1.04 var(--sans);letter-spacing:-.04em;margin:0 0 14px;white-space:nowrap}
+h2 em{font-style:normal;color:var(--acc)}
+.lead{font-size:20px;line-height:1.5;color:var(--sub);margin:0 0 28px;max-width:600px}
+.gh{font:600 13px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--sub);margin:30px 0 10px 8px}
+.group{background:var(--card);border-radius:24px;box-shadow:var(--sh);overflow:hidden;margin-bottom:8px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:19px 24px;border-top:1px solid var(--line);font-size:18px}
+.group>.row:first-child{border-top:0}
+.row .k{color:var(--sub);font-size:17px}.row .v{font-weight:600;text-align:right}.big{font-size:22px}.mono{font-family:var(--mono);font-weight:600;font-size:20px}.acc{color:var(--acc)}
 
-.btn,button.go{display:flex;justify-content:space-between;align-items:center;text-decoration:none;font:600 12px var(--sans);letter-spacing:.2em;text-transform:uppercase;padding:21px 24px;border:1px solid #4a4d4f;color:var(--ink);background:none}
-.btn:after,button.go:after{content:"\2192";font-size:16px;letter-spacing:0}
-.btn.pri,button.go{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
-.card{display:block;text-decoration:none;color:var(--ink);padding:28px 26px;border:1px solid var(--line);background:var(--s)}
-.card b{display:block;font:400 32px/1.1 var(--serif);margin-bottom:8px;font-weight:400}
-.card span{font-size:15px;color:var(--sub)}
+.btn,button.go{display:flex;justify-content:center;align-items:center;text-decoration:none;font:600 17px var(--sans);padding:19px 28px;border-radius:999px;border:0;background:var(--ink);color:#fff}
+.btn.sec{background:var(--card);color:var(--ink);box-shadow:var(--sh)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.card{display:block;text-decoration:none;color:var(--ink);padding:24px;border-radius:26px;background:var(--card);box-shadow:var(--sh)}
+.card b{display:block;font:650 24px/1.15 var(--sans);letter-spacing:-.02em;margin:16px 0 4px}
+.card span{font-size:16px;color:var(--sub)}
+.chip{display:flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:15px;color:#fff;font:700 22px var(--sans);font-style:normal}
 
-.item{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line)}
-.item b{font:400 27px var(--serif);font-weight:400}.item small{display:block;color:var(--sub);font-size:14px;margin-top:2px;letter-spacing:.04em}
-.qty{display:flex;align-items:center;gap:18px}.qty span{min-width:20px;text-align:center;font:400 24px var(--serif)}
-.qty button{width:46px;height:46px;border-radius:50%;border:1px solid #4a4d4f;background:none;color:var(--ink);font:300 24px var(--sans)}
-input{-webkit-user-select:text;user-select:text;font:400 20px var(--sans);width:100%;padding:12px 0;margin:6px 0 30px;border:0;border-bottom:1px solid #4a4d4f;background:none;color:var(--ink);border-radius:0;outline:0}
-input::placeholder{color:#5d5f5d}
+.item b{display:block;font:500 20px var(--sans)}.item small{display:block;color:var(--sub);font-size:15px;margin-top:3px}
+.qty{display:flex;align-items:center;background:var(--bg);border-radius:999px}
+.qty button{width:54px;height:46px;border:0;background:none;color:var(--ink);font:400 26px var(--sans)}
+.qty span{min-width:28px;text-align:center;font:600 19px var(--sans)}
+input{-webkit-user-select:text;user-select:text;font:400 19px var(--sans);width:100%;padding:18px 22px;margin:2px 0 20px;border:0;border-radius:999px;background:var(--card);box-shadow:var(--sh);color:var(--ink);outline:0}
+input::placeholder{color:#a8a6a0}
 
-#qrs{display:flex;gap:22px}
-.wgrid{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end;margin-top:30px}
-#qrs .q{background:#fff;padding:10px;display:inline-block;margin-bottom:10px}
-ul.rules{list-style:none;margin:0;padding:0}
-ul.rules li{padding:16px 0;border-bottom:1px solid var(--line);font-size:19px;line-height:1.5}
-.place{padding:22px 0;border-bottom:1px solid var(--line)}
-.place h4{margin:0 0 6px;font:400 30px var(--serif)}.place p{margin:0;font-size:17px;line-height:1.6;color:var(--sub)}
+.hero{position:relative;overflow:hidden;border-radius:32px;background:linear-gradient(160deg,#1d1d20,#0c0c0d);color:#fff;padding:34px 38px;min-height:250px;margin-bottom:16px}
+.hero .eye{color:rgba(255,255,255,.6)}.hero h2{color:#fff;font-size:clamp(36px,4.7vw,54px);position:relative;margin-bottom:12px}
+.hero p{position:relative;max-width:430px;margin:0;font-size:17px;line-height:1.5;color:rgba(255,255,255,.66)}
+.rw{position:absolute;right:0;bottom:0;height:100%;width:62%;pointer-events:none}
+.wgrid{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:end;margin-top:18px}
+#qrs{display:flex;gap:16px}#qrs>div{text-align:center}
+#qrs .q{background:#fff;padding:10px;border-radius:20px;box-shadow:var(--sh);display:inline-block;margin-bottom:8px;line-height:0}
+#qrs span{font-size:14px;color:var(--sub)}
 
-.svc{display:flex;align-items:center;gap:26px;width:100%;text-align:left;padding:26px 0;border:0;border-bottom:1px solid var(--line);background:none;color:var(--ink)}
-.svc i{font:normal 500 12px var(--sans);letter-spacing:.14em;color:var(--acc);min-width:26px}
-.svc div{flex:1}.svc b{display:block;font:400 36px/1.1 var(--serif);font-weight:400}.svc span{font-size:15px;color:var(--sub)}
-.svc em{font:normal 500 14px var(--sans);letter-spacing:.06em;color:var(--sub)}
-.back{border:0;background:none;color:var(--sub);padding:0;margin-bottom:34px;font:600 12px var(--sans);letter-spacing:.2em;text-transform:uppercase}
-.price{margin:34px 0;padding:26px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.price div{font:400 56px/1.05 var(--serif);color:var(--acc);margin-top:8px}.price small{color:var(--sub);font-size:15px}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-bottom:40px}
-.two ul{margin:12px 0 0;padding-left:18px;font-size:18px;line-height:1.8}
+.place{flex-direction:column;align-items:flex-start;gap:5px}
+.place h4{margin:0;font:600 21px var(--sans);letter-spacing:-.01em}.place p{margin:0;font-size:17px;line-height:1.5;color:var(--sub)}
+.svc{display:flex;align-items:center;gap:16px;width:100%;text-align:left;padding:22px 24px;border:0;border-top:1px solid var(--line);background:none;color:var(--ink)}
+.group>.svc:first-child{border-top:0}
+.svc div{flex:1}.svc b{display:block;font:650 24px/1.15 var(--sans);letter-spacing:-.02em}.svc span{font-size:15px;color:var(--sub)}
+.svc em{font:normal 500 16px var(--sans);color:var(--sub)}.svc:after{content:"\203A";font-size:28px;color:#c4c2bc}
+.back{border:0;background:none;color:var(--acc);padding:0;margin-bottom:24px;font:600 18px var(--sans)}
+.price{padding:26px 28px}.price div{font:700 54px/1.05 var(--sans);letter-spacing:-.04em;margin-top:6px}.price small{color:var(--sub);font-size:16px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0 22px}
+.two .group{padding:22px 26px}.two ul{margin:10px 0 0;padding-left:18px;font-size:18px;line-height:1.75}
 
 @media (orientation:portrait){body{flex-direction:column}
-  nav{width:auto;flex-direction:row;align-items:center;gap:22px;overflow-x:auto;overflow-y:hidden;padding:18px 24px;border-right:0;border-bottom:1px solid var(--line)}
-  nav .mark,nav .label,nav .cl{display:none}nav button{white-space:nowrap;padding:8px 0}nav button i{display:none}nav .sos{margin:0;padding:10px 16px}
-  main{padding:34px 32px}h2{font-size:44px}.two,.wgrid{grid-template-columns:1fr}}
+  nav{width:auto;flex-direction:row;align-items:center;gap:6px;overflow-x:auto;overflow-y:hidden;padding:10px;border-radius:999px}
+  nav .mark,nav .place-tag,nav .cl{display:none}nav button{white-space:nowrap;height:44px}nav .sos{margin:0}
+  main{padding:18px 8px}h2{font-size:42px}.two,.wgrid{grid-template-columns:1fr}.hero{padding:28px}}
 </style>
 </head>
 <body>
 <nav>
-  <div class="mark">RUNWAY</div><div class="label">Sidemen &middot; Bali</div><div class="cl"></div>
-  <button data-t="welcome" class="on"><i>01</i>Welcome</button>
-  <button data-t="drinks"><i>02</i>Drinks &amp; Snacks</button>
-  <button data-t="music"><i>03</i>Music &amp; TV</button>
-  <button data-t="go"><i>04</i>Getting around</button>
-  <button data-t="extras"><i>05</i>Extra services</button>
-  <button data-t="sidemen"><i>06</i>Sidemen guide</button>
-  <button data-t="info"><i>07</i>House info</button>
-  <button data-t="share"><i>08</i>Feedback &amp; share</button>
-  <button data-t="info" class="sos">Emergency</button>
+  <div class="mark">RUNWAY</div><div class="cl"></div><div class="place-tag">Sidemen &middot; Bali</div>
+  <button data-t="welcome" class="on">Welcome</button>
+  <button data-t="info">House info</button>
+  <button data-t="drinks">Drinks &amp; Snacks</button>
+  <button data-t="music">Music &amp; TV</button>
+  <button data-t="go">Getting around</button>
+  <button data-t="extras">Extra services</button>
+  <button data-t="sidemen">Sidemen guide</button>
+  <button data-t="share">Feedback &amp; share</button>
+  <button data-t="info" class="sos" data-i="sos">Emergency</button>
 </nav>
 <main>
   <section id="welcome" class="on">
-    <div class="label" style="margin-bottom:14px">Welcome</div>
-    <h2>Make yourself <em>at home.</em></h2>
-    <p class="lead" style="margin-bottom:22px">Scan a code with your phone, or use this iPad. To return here, press the round button and tap the Runway icon.</p>
-    <div class="row"><span class="label">Wi-Fi network</span><span class="v" id="ssid"></span></div>
-    <div class="row"><span class="label">Password</span><span class="v" id="pw"></span></div>
+    <div class="hero">
+      <svg class="rw" viewBox="0 0 400 260" preserveAspectRatio="xMaxYMax slice" aria-hidden="true"><path d="M150 260L255 60M390 260L285 60" stroke="rgba(255,255,255,.22)" stroke-width="1.5" fill="none"/><g stroke="rgba(255,255,255,.55)" fill="none" stroke-linecap="round"><path d="M270 252V228" stroke-width="10"/><path d="M270 214V198" stroke-width="8"/><path d="M270 184V172" stroke-width="6"/><path d="M270 158V150" stroke-width="4.5"/><path d="M270 138V132" stroke-width="3.2"/><path d="M270 120V116" stroke-width="2.2"/></g><g fill="#ff5a1f"><circle cx="157" cy="246" r="4.8"/><circle cx="383" cy="246" r="4.8"/><circle cx="178" cy="206" r="4.1"/><circle cx="362" cy="206" r="4.1"/><circle cx="197" cy="170" r="3.5"/><circle cx="343" cy="170" r="3.5"/><circle cx="213" cy="140" r="3.0"/><circle cx="327" cy="140" r="3.0"/><circle cx="226" cy="115" r="2.5"/><circle cx="314" cy="115" r="2.5"/><circle cx="237" cy="95" r="2.2"/><circle cx="303" cy="95" r="2.2"/><circle cx="244" cy="80" r="1.9"/><circle cx="296" cy="80" r="1.9"/></g></svg>
+      <div class="eye">Welcome to Runway</div>
+      <h2>Ready to <em>take off.</em></h2>
+      <p>Scan a code with your phone, or use this iPad. To return here, press the round button and tap the Runway icon.</p>
+    </div>
+    <div class="group">
+      <div class="row"><span class="k">Wi-Fi network</span><span class="v mono" id="ssid"></span></div>
+      <div class="row"><span class="k">Password</span><span class="v mono" id="pw"></span></div>
+    </div>
     <div class="wgrid">
-      <a class="btn pri" id="wa-concierge" href="#">Chat with the concierge</a>
+      <a class="btn" id="wa-concierge" href="#">Chat with the concierge</a>
       <div id="qrs">
-        <div><div class="q" id="qr-wifi"></div><br><span class="label">Join Wi-Fi</span></div>
-        <div><div class="q" id="qr-wa"></div><br><span class="label">Concierge</span></div>
+        <div><div class="q" id="qr-wifi"></div><br><span>Join Wi-Fi</span></div>
+        <div><div class="q" id="qr-wa"></div><br><span>Concierge</span></div>
       </div>
     </div>
   </section>
 
+  <section id="info">
+    <div class="eye">House info</div>
+    <h2>Good to <em>know.</em></h2>
+    <div class="group">
+      <div class="row"><span class="k">Check-in</span><span class="v">From 14:00</span></div>
+      <div class="row"><span class="k">Check-out</span><span class="v">By 11:00</span></div>
+    </div>
+    <div class="gh">House rules</div>
+    <div class="group">
+      <div class="row">Please take your shoes off before entering the house.</div>
+      <div class="row">No smoking inside. Please use the outdoor areas.</div>
+      <div class="row">Quiet hours from 22:00. Our neighbours are close.</div>
+      <div class="row">Shower before you swim. Children must be supervised at the pool.</div>
+      <div class="row">The water from the taps is filtered.</div>
+      <div class="row">Please tell us before inviting visitors.</div>
+    </div>
+    <div class="gh">Emergency</div>
+    <div class="group">
+      <div class="row"><span class="k">General emergency</span><span class="v big acc">112</span></div>
+      <div class="row"><span class="k">Police</span><span class="v big acc">110</span></div>
+      <div class="row"><span class="k">Ambulance</span><span class="v big acc">118</span></div>
+    </div>
+    <a class="btn wa" data-to="concierge" data-msg="URGENT at Runway: " style="margin-top:14px">Message the villa manager now</a>
+    <div class="gh">Nearby hospitals</div>
+    <div class="group">
+      <div class="row"><span class="k">RSUD Klungkung, Semarapura</span><span class="v">about 30 min</span></div>
+      <div class="row"><span class="k">RSUD Karangasem, Amlapura</span><span class="v">about 40 min</span></div>
+    </div>
+    <div class="gh">Pharmacy</div>
+    <div class="group"><div class="row"><span class="k">Nearest apotek</span><span class="v">Ask the concierge</span></div></div>
+  </section>
+
   <section id="drinks">
-    <div class="label" style="margin-bottom:18px">Drinks &amp; Snacks</div>
-    <h2>Order to <em>the villa.</em></h2>
+    <div class="eye">Drinks &amp; Snacks</div>
+    <h2>Order to the <em>villa.</em></h2>
     <p class="lead">Choose what you like and send. Our staff will bring it over.</p>
-    <div id="menu"></div>
-    <div class="label" style="margin-top:34px">Your name / where you are</div>
+    <div class="group" id="menu"></div>
+    <div class="gh">Your name / where you are</div>
     <input id="who" placeholder="e.g. Sam, by the pool">
     <button class="go" id="send-order" style="width:100%">Send order to staff</button>
   </section>
 
   <section id="music">
-    <div class="label" style="margin-bottom:18px">Music &amp; TV</div>
+    <div class="eye">Music &amp; TV</div>
     <h2>Set the <em>mood.</em></h2>
     <p class="lead">Connect the iPad to the speaker or projector by Bluetooth, then open an app. Press the round button to come back.</p>
     <div class="grid">
-      <a class="card" href="spotify:"><b>Spotify</b><span>Music</span></a>
-      <a class="card" href="nflx://www.netflix.com/browse"><b>Netflix</b><span>Movies &amp; series</span></a>
+      <a class="card" href="spotify:"><i class="chip" style="background:#1db954">S</i><b>Spotify</b><span>Music</span></a>
+      <a class="card" href="nflx://www.netflix.com/browse"><i class="chip" style="background:#e50914">N</i><b>Netflix</b><span>Movies &amp; series</span></a>
     </div>
   </section>
 
   <section id="go">
-    <div class="label" style="margin-bottom:18px">Getting around</div>
-    <h2>Going <em>out?</em></h2>
+    <div class="eye">Getting around</div>
+    <h2>Where to <em>next?</em></h2>
     <p class="lead">Book a ride yourself, or let the concierge arrange a driver.</p>
     <div class="grid">
-      <a class="card" href="grab://open"><b>Grab</b><span>Cars &amp; motorbike taxis</span></a>
-      <a class="card wa" data-to="concierge" data-msg="Hi, I'd like a car with driver. Date / time / destination: "><b>Car with driver</b><span>Ask the concierge</span></a>
-      <a class="card wa" data-to="concierge" data-msg="Hi, I'd like to rent a scooter. Dates: "><b>Scooter rental</b><span>Ask the concierge</span></a>
+      <a class="card" href="grab://open"><i class="chip" style="background:#00b14f">G</i><b>Grab</b><span>Cars &amp; motorbike taxis</span></a>
+      <a class="card wa" data-to="concierge" data-msg="Hi, I'd like a car with driver. Date / time / destination: "><i class="chip" style="background:#141414">&#9679;</i><b>Car with driver</b><span>Ask the concierge</span></a>
+      <a class="card wa" data-to="concierge" data-msg="Hi, I'd like to rent a scooter. Dates: "><i class="chip" style="background:#141414">&#9679;</i><b>Scooter rental</b><span>Ask the concierge</span></a>
     </div>
   </section>
 
   <section id="extras">
     <div id="svc-list">
-      <div class="label" style="margin-bottom:18px">Extra services</div>
+      <div class="eye">Extra services</div>
       <h2>Make it <em>special.</em></h2>
       <p class="lead">Tap a service to see details and prices.</p>
-      <div id="svcs"></div>
+      <div class="group" id="svcs"></div>
     </div>
     <div id="svc-detail" style="display:none"></div>
   </section>
 
   <section id="sidemen">
-    <div class="label" style="margin-bottom:18px">Sidemen guide</div>
+    <div class="eye">Sidemen guide</div>
     <h2>The <em>valley.</em></h2>
     <p class="lead">A quiet valley on the slopes of Mt Agung. Ask the concierge and we will arrange any of these.</p>
-    <div id="places"></div>
-  </section>
-
-  <section id="info">
-    <div class="label" style="margin-bottom:18px">House info</div>
-    <h2>Good to <em>know.</em></h2>
-    <div class="row"><span class="label">Check-in</span><span class="v">From 14:00</span></div>
-    <div class="row"><span class="label">Check-out</span><span class="v">By 11:00</span></div>
-    <h3 class="label">House rules</h3>
-    <ul class="rules">
-      <li>Please take your shoes off before entering the house.</li>
-      <li>No smoking inside. Please use the outdoor areas.</li>
-      <li>Quiet hours from 22:00. Our neighbours are close.</li>
-      <li>Shower before you swim. Children must be supervised at the pool.</li>
-      <li>The water from the taps is filtered.</li>
-      <li>Please tell us before inviting visitors.</li>
-    </ul>
-    <h3 class="label">Emergency</h3>
-    <div class="row"><span class="label">General emergency</span><span class="v acc">112</span></div>
-    <div class="row"><span class="label">Police</span><span class="v acc">110</span></div>
-    <div class="row"><span class="label">Ambulance</span><span class="v acc">118</span></div>
-    <a class="btn pri wa" data-to="concierge" data-msg="URGENT at Runway: " style="margin-top:22px">Message the villa manager now</a>
-    <h3 class="label">Nearby hospitals</h3>
-    <div class="row"><span class="label">RSUD Klungkung, Semarapura</span><span class="v">about 30 min</span></div>
-    <div class="row"><span class="label">RSUD Karangasem, Amlapura</span><span class="v">about 40 min</span></div>
-    <h3 class="label">Pharmacy</h3>
-    <div class="row"><span class="label">Nearest apotek</span><span class="v">Ask the concierge</span></div>
+    <div class="group" id="places"></div>
   </section>
 
   <section id="share">
-    <div class="label" style="margin-bottom:18px">Feedback &amp; share</div>
+    <div class="eye">Feedback &amp; share</div>
     <h2>Tell us <em>anything.</em></h2>
     <p class="lead">Ideas, problems, thank-yous. It goes straight to the management.</p>
-    <a class="btn pri wa" data-to="mgmt" data-msg="Suggestion for Runway: ">Send a suggestion</a>
-    <p class="lead" style="margin:44px 0 18px">Enjoying your stay? Tag us and share your photos.</p>
+    <a class="btn wa" data-to="mgmt" data-msg="Suggestion for Runway: ">Send a suggestion</a>
+    <p class="lead" style="margin:40px 0 16px">Enjoying your stay? Tag us and share your photos.</p>
     <div class="grid">
-      <a class="card" id="ig" href="#"><b>Instagram</b><span id="ig-t"></span></a>
-      <a class="card" id="tt" href="#"><b>TikTok</b><span id="tt-t"></span></a>
+      <a class="card" id="ig" href="#"><i class="chip" style="background:#e1306c">I</i><b>Instagram</b><span id="ig-t"></span></a>
+      <a class="card" id="tt" href="#"><i class="chip" style="background:#141414">T</i><b>TikTok</b><span id="tt-t"></span></a>
     </div>
   </section>
 </main>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 // ===== EDIT THESE =====
@@ -235,12 +251,23 @@ var PLACES = [
   ["Besakih temple","Bali's largest temple complex on the slope of Mt Agung. Sarong and modest dress required."],
   ["Local warungs","Ask the concierge for our favourite family-run places in the valley."]];
 // ======================
+var ICONS={
+ welcome:'<path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/>',
+ info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/>',
+ drinks:'<path d="M6 4h12l-1.5 16h-9z"/><path d="M7 9h10"/>',
+ music:'<circle cx="12" cy="12" r="9"/><path d="M10 8.5l6 3.5-6 3.5z"/>',
+ go:'<path d="M12 21s7-6 7-11a7 7 0 10-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+ extras:'<path d="M12 3l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L12 16.9 6.4 20.1l1.4-6.3L3 9.5l6.4-.6z"/>',
+ sidemen:'<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
+ share:'<path d="M4 5h16v11H9l-5 4z"/>',
+ sos:'<path d="M12 3l9.5 17h-19z"/><path d="M12 10v4.5M12 17.5v.01"/>'};
 function wa(to,msg){var n=to==="mgmt"?CONFIG.waMgmt:to==="staff"?CONFIG.waStaff:CONFIG.waConcierge;return "https://wa.me/"+n+"?text="+encodeURIComponent(msg||"")}
 function $(id){return document.getElementById(id)}
 var tabs=document.querySelectorAll("nav button"),secs=document.querySelectorAll("section"),main=document.querySelector("main"),timer;
+tabs.forEach(function(b){b.insertAdjacentHTML("afterbegin",'<svg viewBox="0 0 24 24">'+ICONS[b.dataset.i||b.dataset.t]+'</svg>')});
 function closeSvc(){$("svc-detail").style.display="none";$("svc-list").style.display="block"}
 function show(id){closeSvc();tabs.forEach(function(b){b.classList.toggle("on",b.dataset.t===id&&!b.classList.contains("sos"))});secs.forEach(function(s){s.classList.toggle("on",s.id===id)});main.scrollTop=0}
-tabs.forEach(function(b){b.onclick=function(){show(b.dataset.t);if(b.classList.contains("sos"))setTimeout(function(){var h=document.querySelectorAll("#info h3")[1];h&&main.scrollTo(0,h.offsetTop-30)},0)}});
+tabs.forEach(function(b){b.onclick=function(){show(b.dataset.t);if(b.classList.contains("sos"))setTimeout(function(){var h=document.querySelectorAll("#info .gh")[1];h&&main.scrollTo(0,h.offsetTop-30)},0)}});
 
 $("ssid").textContent=CONFIG.wifiName;$("pw").textContent=CONFIG.wifiPass;
 $("wa-concierge").href=wa("concierge","Hi, I'm staying at Runway. ");
@@ -253,7 +280,7 @@ try{
 }catch(e){document.querySelectorAll("#qrs .q").forEach(function(q){q.textContent="QR unavailable"})}
 
 var qty=MENU.map(function(){return 0});
-$("menu").innerHTML=MENU.map(function(m,i){return '<div class="item"><div><b>'+m[0]+'</b><small>'+m[1]+'</small></div><div class="qty"><button data-i="'+i+'" data-d="-1">&minus;</button><span id="q'+i+'">0</span><button data-i="'+i+'" data-d="1">+</button></div></div>'}).join("");
+$("menu").innerHTML=MENU.map(function(m,i){return '<div class="row item"><div><b>'+m[0]+'</b><small>'+m[1]+'</small></div><div class="qty"><button data-i="'+i+'" data-d="-1">&minus;</button><span id="q'+i+'">0</span><button data-i="'+i+'" data-d="1">+</button></div></div>'}).join("");
 $("menu").onclick=function(e){var b=e.target.closest("button");if(!b)return;var i=+b.dataset.i;qty[i]=Math.max(0,qty[i]+ +b.dataset.d);$("q"+i).textContent=qty[i]};
 $("send-order").onclick=function(){
   var lines=MENU.map(function(m,i){return qty[i]?qty[i]+" x "+m[0].replace(/&amp;/g,"&"):""}).filter(Boolean);
@@ -262,17 +289,17 @@ $("send-order").onclick=function(){
   location.href=wa("staff","Drinks & Snacks order"+(who?" ("+who+")":"")+":\n"+lines.join("\n"));
 };
 
-$("svcs").innerHTML=SERVICES.map(function(s,i){return '<button class="svc" data-i="'+i+'"><i>0'+(i+1)+'</i><div><b>'+s.n+'</b><span>'+s.tag+'</span></div><em>'+s.price+'</em></button>'}).join("");
+$("svcs").innerHTML=SERVICES.map(function(s,i){return '<button class="svc" data-i="'+i+'"><div><b>'+s.n+'</b><span>'+s.tag+'</span></div><em>'+s.price+'</em></button>'}).join("");
 $("svcs").onclick=function(e){var b=e.target.closest(".svc");if(!b)return;var s=SERVICES[+b.dataset.i];
   var ul=function(a){return a.map(function(x){return "<li>"+x+"</li>"}).join("")};
-  $("svc-detail").innerHTML='<button class="back" id="svc-back">&larr; All services</button><div class="label">'+s.tag+'</div><h2>'+s.n+'</h2><p class="lead" style="margin-bottom:0">'+s.d+'</p>'+
-    '<div class="price"><span class="label">Price</span><div>'+s.price+'</div><small>'+s.unit+'</small></div>'+
-    '<div class="two"><div><span class="label">Included</span><ul>'+ul(s.inc)+'</ul></div><div><span class="label">Good to know</span><ul>'+ul(s.know)+'</ul></div></div>'+
-    '<a class="btn pri" href="'+wa("concierge",s.msg)+'">Request on WhatsApp</a>';
+  $("svc-detail").innerHTML='<button class="back" id="svc-back">&lsaquo; All services</button><div class="eye">'+s.tag+'</div><h2>'+s.n+'</h2><p class="lead" style="margin-bottom:22px">'+s.d+'</p>'+
+    '<div class="group price"><span class="k" style="color:var(--sub)">Price</span><div>'+s.price+'</div><small>'+s.unit+'</small></div>'+
+    '<div class="two"><div class="group"><span class="gh" style="margin:0">Included</span><ul>'+ul(s.inc)+'</ul></div><div class="group"><span class="gh" style="margin:0">Good to know</span><ul>'+ul(s.know)+'</ul></div></div>'+
+    '<a class="btn" href="'+wa("concierge",s.msg)+'">Request on WhatsApp</a>';
   $("svc-list").style.display="none";$("svc-detail").style.display="block";main.scrollTop=0;
   $("svc-back").onclick=function(){closeSvc();main.scrollTop=0};
 };
-$("places").innerHTML=PLACES.map(function(p){return '<div class="place"><h4>'+p[0]+'</h4><p>'+p[1]+'</p></div>'}).join("");
+$("places").innerHTML=PLACES.map(function(p){return '<div class="row place"><h4>'+p[0]+'</h4><p>'+p[1]+'</p></div>'}).join("");
 
 function reset(){clearTimeout(timer);timer=setTimeout(function(){show("welcome")},90000)}
 ["touchstart","click","scroll"].forEach(function(ev){document.addEventListener(ev,reset,{passive:true})});reset();
